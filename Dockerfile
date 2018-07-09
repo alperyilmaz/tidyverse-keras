@@ -23,6 +23,8 @@ RUN installGithub.r rstudio/reticulate rstudio/keras
 #RUN echo 'TENSORFLOW_PYTHON = "/tensorflow/bin/python"' >> /usr/local/lib/R/etc/Renviron \
 #&& echo 'RETICULATE_PYTHON = "/tensorflow/bin/python"' >> /usr/local/lib/R/etc/Renviron 
 
+RUN git clone https://github.com/rstudio/keras.git && cp -r keras/vignettes/examples /home/rstudio && rm -r keras/
+
 RUN > rscript.R \
     && echo 'tensorflow::install_tensorflow()' >> rscript.R \
     && echo 'keras::install_keras()' >> rscript.R \
