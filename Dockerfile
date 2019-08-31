@@ -35,3 +35,4 @@ RUN > rscript.R \
     && rm -rf /tmp/downloaded_packages/* \
     && rm -rf /home/rstudio/.cache/pip \
     && rm -rf /root/.cache/pip
+    
