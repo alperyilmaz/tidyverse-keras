@@ -4,12 +4,14 @@ LABEL maintainer="alperyilmaz@gmail.com"
 
 ENV WORKON_HOME /tensorflow
 
-RUN apt-get update && apt-get install -y --no-install-recommends libpython2.7 python-pip virtualenv zlib1g-dev \
+RUN apt-get update && apt-get install -y --no-install-recommends python3-dev python3-pip  zlib1g-dev \
     && rm /var/lib/dpkg/info/* \
     && rm /var/lib/apt/lists/*debian*
 
+RUN pip3 install -U virtualenv
+
 RUN mkdir /tensorflow \
-    && virtualenv --system-site-packages /tensorflow
+    && virtualenv --system-site-packages -p python3 /tensorflow
     
 
 RUN . /tensorflow/bin/activate 
@@ -25,11 +27,8 @@ RUN installGithub.r rstudio/reticulate rstudio/keras
 
 RUN git clone https://github.com/rstudio/keras.git && cp -r keras/vignettes/examples /home/rstudio && rm -r keras/
 
-RUN /usr/bin/python2.7 -m pip install --upgrade --user virtualenv
-
 RUN > rscript.R \
-    && echo 'tensorflow::install_tensorflow()' >> rscript.R \
-    && echo 'keras::install_keras()' >> rscript.R \
+    && echo 'keras::install_keras(tensorflow = "2.0.0-rc0")' >> rscript.R \
     && echo 'reticulate::py_discover_config("keras")' >> rscript.R \
     && echo 'reticulate::py_discover_config("tensorflow")' >> rscript.R \
     && Rscript rscript.R \
