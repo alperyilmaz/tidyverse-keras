@@ -25,6 +25,8 @@ RUN installGithub.r rstudio/reticulate rstudio/keras
 
 RUN git clone https://github.com/rstudio/keras.git && cp -r keras/vignettes/examples /home/rstudio && rm -r keras/
 
+RUN /usr/bin/python2.7 -m pip install --upgrade --user virtualenv
+
 RUN > rscript.R \
     && echo 'tensorflow::install_tensorflow()' >> rscript.R \
     && echo 'keras::install_keras()' >> rscript.R \
