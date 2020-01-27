@@ -28,7 +28,7 @@ RUN installGithub.r rstudio/reticulate rstudio/keras
 RUN git clone https://github.com/rstudio/keras.git && cp -r keras/vignettes/examples /home/rstudio && rm -r keras/
 
 RUN > rscript.R \
-    && echo 'keras::install_keras(tensorflow = "2.0.0-rc0")' >> rscript.R \
+    && echo 'keras::install_keras(tensorflow = "default")' >> rscript.R \
     && echo 'reticulate::py_discover_config("keras")' >> rscript.R \
     && echo 'reticulate::py_discover_config("tensorflow")' >> rscript.R \
     && Rscript rscript.R \
