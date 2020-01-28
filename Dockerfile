@@ -4,7 +4,7 @@ LABEL maintainer="alperyilmaz@gmail.com"
 
 ENV WORKON_HOME /tensorflow
 
-RUN apt-get update && apt-get install -y --no-install-recommends python3-dev python3-pip  zlib1g-dev \
+RUN apt-get update && apt-get install -y --no-install-recommends python3-dev python3-pip  python3-venv zlib1g-dev \
     && rm /var/lib/dpkg/info/* \
     && rm /var/lib/apt/lists/*debian*
 
